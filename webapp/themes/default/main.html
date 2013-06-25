@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <title>Main Title</title>
+        <link rel="stylesheet" type="text/css" href="themes/<!-- THEME -->/main.css" />
+        <link rel="stylesheet" type="text/css" href="js/chart.css" />
+		    <script type="text/javascript" src="js/lib/prototype-1.6.0.2.js"></script>
+		    <!--[if IE]>
+    			<script type="text/javascript" src="js/lib/excanvas.js"></script>
+    			<script type="text/javascript" src="js/lib/base64.js"></script>
+    		<![endif]-->
+    		<script type="text/javascript" src="js/lib/canvas2image.js"></script>
+    		<script type="text/javascript" src="js/lib/canvastext.js"></script>
+    		<script type="text/javascript" src="js/flotr-0.2.0-alpha.js"></script>
+    		<script type="text/javascript" >
+            function GetGraph()
+            {
+                window.location.href = "main.php?s=<!-- SENSORNAME -->&" + 
+                                       "min=<!-- SENSORMIN -->&" + 
+                                       "max=<!-- SENSORMAX -->&" +
+                                       "df=" + document.getElementById("txt_datefrom").value + "&" +
+                                       "dt=" + document.getElementById("txt_dateto").value + "&" +
+                                       "vf=" + document.getElementById("txt_valuefrom").value + "&" +
+                                       "vt=" + document.getElementById("txt_valueto").value;
+            }
+    		</script>    		
+    </head>
+    <body id="mainbody">
+        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+            <tr>
+                <td id="col_report">
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <tr>
+                            <td id="head_report">
+                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                    <tr>
+                                        <td id="cel_caption">
+                                            <!-- SENSORNAME -->
+                                        </td>
+                                        <td id="cel_query">
+                                            <table cellpadding="0" cellspacing="0" border="0" align="right" id="tbl_query">
+                                                <tr>
+                                                    <td class="lbl_query"><!-- DATEFROM -->:</td>
+                                                    <td><input class="infield" id="txt_datefrom" type="text" name="txt_datefrom" value="<!-- dfReq -->" size="16" /></td>
+                                                    <td class="lbl_query"><!-- DATETO -->:</td>
+                                                    <td><input class="infield" id="txt_dateto" type="text" name="txt_dateto" value="<!-- dtReq -->" size="16" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="lbl_query"><!-- VALUEFROM -->:</td>
+                                                    <td><input class="infield" id="txt_valuefrom" type="text" name="txt_valuefrom" value="<!-- vfReq -->" size="16" /></td>
+                                                    <td class="lbl_query"><!-- VALUETO -->:</td>
+                                                    <td><input class="infield" id="txt_valueto" type="text" name="txt_valueto" value="<!-- vtReq -->" size="16" /></td>
+                                                </tr>                                                
+                                            </table>
+                                        </td>
+                                        <td id="cel_search">
+                                            <input id="btn_search" onclick="GetGraph();" type="button" name="btn_search" value="<!-- SEARCH -->" />
+                                        </td>
+                                        
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                              <div id="container" valign="top" style="width:90%;height:380px;"></div>
+		                            <div style="height:10px;"></div>
+                                <!--[if !IE]><!-->
+                                    <input type="button" id="btnDownload" name="btnDownload" value="<!-- GRAPHDOWNLOAD -->" onclick="f.saveImage('png')" />
+                                <!--<![endif]-->
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <!-- GRAPHDATA -->
+    </body>        
+</html>

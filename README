@@ -1,0 +1,94 @@
+sagent is a linux service, developed using python, that monitor
+measurements detected by sensors using plugins (also dev in python).
+
+Copyright (c) 2013, Armando Basile
+
+INSTALL ENGINE
+---------------------------------------------------------------------
+
+  1. you need to install python dependencies: python-daemon python-lockfile
+  2. create folder for application files:
+     # mkdir /var/sagent
+
+  3. copy "engine" contents files and folders under created folder.
+     "sensors" folder contains plugins python script that
+     drive hardware sensor to read measure.
+     "notifiers" folder contains plugins python script used to
+     notify out of range values.
+
+  4. copy init_script/sagentd into /etc/init.d folder
+  5. give execute permission to file:
+     # chmod 775 /etc/init.d/sagentd
+
+  6. verify that "SCRIPT_FILE" and "PID_FILE" parameters 
+     into /etc/init.d/sagentd link correctly to the "agent.py" python 
+     application script
+
+  7. add new service
+     ON FEDORA/MAGEIA/MANDRIVA LIKE DISTRO:
+     # chkconfig --add sagentd
+
+     ON DEBIAN/UBUNTU/MINT LIKE DISTRO:
+     # update-rc.d sagentd defaults
+
+
+
+RUN ENGINE
+---------------------------------------------------------------------
+
+  1. Edit config file sensors/sensors.xml to configure sensors to use
+     and parameters (sensor unique name, min/max range, enable, etc.)
+
+  2. By default application is configured to generate: 
+     log file in /var/tmp/sagent.log
+     db file in /var/tmp/sagent.sqlite
+     pid file in /var/run/sagent.pid 
+     and use 9800 tcp port to exchange data with ajax web interface. Only if 
+     you need to change some parameters can edit "sagent-settings.xml" file.
+     
+
+
+WEB APPLICATION
+---------------------------------------------------------------------
+
+  1. you need to install php-pdo_sqlite php-sockets
+  2. Create /var/www/webapps/sagent folder
+  3. copy files from webapp to /var/www/webapps/sagent folder
+  4. change owner of folder to apache user and group:
+     # chown -R apache:apache /var/www/webapps/sagent
+  5. edit conf/config.php to configure parameters:
+     $basedir, $basevirtdir, $dbpath, $service_host, $service_port
+  6. create under /etc/httpd/conf/webapps.d/ (depends by distro used) file
+     sagent.conf with web application data as follow:
+
+     Alias /sagent "/var/www/webapps/sagent"
+
+     <Directory "/var/www/webapps/sagent">
+         Options Indexes FollowSymLinks
+         Order allow,deny
+         Allow from all
+     </Directory>
+  7. restart apache
+     # service httpd restart (specific for distro)
+
+  8. if http://localhost/sagent have db access problem try to 
+     change permissions on db file:
+     # chmod 666 /var/tmp/sagent.sqlite
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

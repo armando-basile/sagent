@@ -1,0 +1,49 @@
+
+      <script language="JavaScript">
+          
+          var dtValues = [<!-- DATETIMEVALUES -->];
+          
+          // Wait dom's finished loading.
+          var f;
+          document.observe('dom:loaded', function() {
+
+              // Draw graph.
+              f = Flotr.draw($('container'), [
+<!-- DATAVALUES -->
+                       ],
+                       {
+                        title: '<!-- GRAPHTITLE -->',
+                        subtitle: '<!-- GRAPHSUBTITLE -->',
+                        xaxis:{
+                            title: '<!-- GRAPHXTITLE -->',
+                            noTicks: 7,
+                            },
+                        yaxis:{
+                            title: '<!-- GRAPHYTITLE -->',
+                            noTicks: 7,
+                            },
+                        grid: {
+                            verticalLines: false,
+                            backgroundColor: 'white'
+                            },
+                        spreadsheet: {  
+                            show: true
+                            },
+                        legend: {
+                            show: false,
+                            },
+                        mouse: {
+                            track: true,
+                            //lineColor: 'purple',
+                            relative: true,
+                            position: 'ne',
+                            sensibility: 1, // => The smaller this value, the more precise you've to point
+                            trackDecimals: 2,
+                            trackFormatter: function(obj){ 
+                                return dtValues[Math.floor(obj.x)] + "<br />" + obj.y; }
+                            },
+                        HtmlText: false
+                       }
+            );
+});
+      </script>

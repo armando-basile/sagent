@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>Menu Title</title>
+        <link rel="stylesheet" type="text/css" href="themes/<!-- THEME -->/main.css" />
+        <script type="text/javascript" src="js/ajax.js"></script>
+        <script type="text/javascript" src="js/updatesensors.js"></script>
+        <script type="text/javascript">
+            <!-- SENSORS_DATA -->
+        </script>
+        
+    </head>
+    <body id="menubody">
+        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+            <tr>
+                <td id="col_sensor">
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <!-- SENSORS -->
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <script type="text/javascript" >
+            window.setTimeout("UpdateMeasures()", 5000);
+        </script>
+    </body>
+</html>

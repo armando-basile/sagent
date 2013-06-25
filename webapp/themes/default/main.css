@@ -1,0 +1,189 @@
+
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#topbody {
+    background-color: #8C0900;
+}
+
+#menubody {
+    background-color: #CCCCCC;
+}
+
+
+/* TOP SECTION  */
+#toprow {
+    height: 90px;    
+    color: white;
+    padding: 2px;
+    width: 100%;
+}
+
+#toprowImg {
+    background-image:url('../../images/logo.png');
+    background-repeat:no-repeat;
+    background-position:center center;
+    height: 88px;
+    width: 88px;
+}
+
+#toprowDesc {
+    width: 600px;
+    text-align: left;
+    vertical-align: middle;
+    font-size: 22px;
+    color: #EEEEEE;    
+}
+
+#toprowBuild {
+    text-align: right;
+    vertical-align: middle;
+    font-size: 13px;
+    padding-right: 4px;
+    color: #DDDDDD;
+}
+
+
+/* MENU SECTION */
+#col_sensor {
+    width: 100%;
+    vertical-align: top;
+    padding: 6px;
+}
+
+.row_sensor_space {
+    height: 3px;     
+}
+
+.cel_sensorname {
+    color: #3A3A3A;
+    font-size: 14px;    
+    text-align: left;
+    vertical-align: middle;
+}
+
+.sensorlink {
+    color: #3A3A3A;
+    font-size: 14px;    
+    text-decoration: none;    
+}
+
+.sensorlink:hover {
+    text-decoration:underline;    
+}
+
+
+.cel_sensorvalue {
+    text-align: right;
+    vertical-align: middle;
+    background-color: green;
+    width: 50px;
+    color: white;
+    padding: 4px;
+}
+
+
+/* WELCOME SECTION */
+#welcomeImg {
+    background-image:url('../../images/arrow_left.png');
+    background-repeat:no-repeat;
+    background-position:center center;
+    height: 88px;
+    width: 88px;
+}
+
+#welcomeDesc {
+    font-size: 18px;
+    text-align: left;
+    vertical-align: middle;
+    color: #666666;
+    padding: 5px;
+}
+
+
+
+/* REPORT SECTION */
+#col_report {
+    vertical-align: top;
+}
+
+
+#head_report {
+    height: 64px;
+    background-color: #FFE2D6;
+    vertical-align: top;    
+}
+
+
+#cel_caption {   
+    height: 64px;     
+    vertical-align: middle;
+    color: #7D7D7D;
+    font-size: 28px;
+    padding-left: 8px;
+    text-align: left;
+    width: *;
+}
+
+#langobj {
+    font-size: 12px;
+    margin-top: 4px;
+    padding: 2px;
+}
+
+#cel_query {   
+    height: 64px;     
+    vertical-align: middle;
+    width: 420px;
+    text-align: right;
+}
+
+#tbl_query {
+    color: #7A7A7A;
+    font-size: 12px;
+        
+}
+
+.lbl_query {
+    text-align: right;
+}
+
+#cel_search {   
+    height: 64px;     
+    vertical-align: middle;
+    width: 64px;
+}
+
+
+#btn_search {
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+
+.infield {
+    color: #7A7A7A;
+    font-size: 12px;    
+}
+
+
+
+.footertext {
+    color: #6A6A6A;
+    font-size: 12px;  
+}
+
+#btnDownload {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 20px;
+}
+
+
+
+

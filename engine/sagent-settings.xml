@@ -1,0 +1,17 @@
+<main>
+    <settings>
+    
+        <!-- sagent server port used to communicate with web application -->
+        <serverport value = "9800" />
+        
+        <!-- sqlite db file path -->
+        <dbfilepath value = "/var/tmp/sagent.sqlite" />
+    
+        <!-- pid file path -->
+        <pidfilepath value = "/var/run/sagent.pid" />
+    
+        <!-- log file path -->
+        <logfilepath value = "/var/tmp/sagent.log" />
+    
+    </settings>
+</main>

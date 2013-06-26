@@ -6,8 +6,8 @@ __author__     = "Armando Basile"
 __copyright__  = "copytight (c) 2013"
 __credits__    = ["AUTHOR_NAME"]
 __license__    = "GPL"
-__version__    = "0.1.2.0"
-__date__       = "2013-06-21"
+__version__    = "0.1.5.0"
+__date__       = "2013-06-26"
 __maintainer__ = "Armando Basile"
 __email__      = "armando@integrazioneweb.com"
 __status__     = "Stable"
@@ -15,8 +15,8 @@ __status__     = "Stable"
 
 import socket
 import thread
+import importlib
 import threading
-import subprocess
 import xml.etree.ElementTree as etree
 import datetime
 import time
@@ -39,66 +39,10 @@ es = []
 
 
 
-# Get sensor data
-def GetSensorData(sensorScript, sensorArgs):
-    global APPPATH
-    global logger
-    
-    strErr = ""
-    strOut = ""
-    
-    try:
-        # execute command
-        subPro = subprocess.Popen(['/usr/bin/python', sensorScript + '.py', sensorArgs], \
-                                  stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    
-        # retrieve response or error (remove new line at the end)
-        (strOut, strErr) = subPro.communicate()
-        strErr = strErr.replace('\r', '').replace('\n', '')
-        strOut = strOut.replace('\r', '').replace('\n', '')
-
-        # check for error detected
-        if (strErr != ''):
-            return "ERR"
-    
-        else:
-            return strOut
-    
-    except Exception, e:
-        # error detected
-        logger.error("GetSensorData::error " + e.message)
-        return "ERR"
 
 
 
-# Send notify
-def SendNotify(sScript, nParameters):
-    global logger
-    
-    strErr = ""
-    strOut = ""
-    
-    try:
-        # execute command
-        subPro = subprocess.Popen(['/usr/bin/python', sScript + '.py', nParameters], \
-                                  stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    
-        # retrieve response or error (remove new line at the end)
-        (strOut, strErr) = subPro.communicate()
-        strErr = strErr.replace('\r', '').replace('\n', '')
-        strOut = strOut.replace('\r', '').replace('\n', '')
-
-        return ""
-    
-    except Exception, e:
-        # error detected
-        logger.error("SendNotify::error " + e.message)
-        return "ERR"
-
-
-
-
-
+# class to manage web app requests
 class SocketServerClass():
     
     isRunning = True
@@ -171,7 +115,7 @@ class SocketServerClass():
     
     
     
-    # Manage client handler
+    # Manage web app client handler
     def ProcessClient(self, reqClient):
         global logger
         size = 1024
@@ -222,7 +166,7 @@ class SocketServerClass():
             for sensor in es:                
                 if (sensor.NAME == reqData):
                     # sensor founded, try to tetrieve measure
-                    resp = GetSensorData(APPPATH + '/sensors/' + sensor.SCRIPT, sensor.PARAMS)
+                    resp = str(sensor.SENSORCLASS.GetValue(sensor.PARAMS))
                     
         except Exception, e:
             logger.error("ProcessRequest::req: " + reqData + " - error " + e.message)
@@ -328,7 +272,7 @@ class agent():
         
 
         # execute script to detect measure
-        retValue = GetSensorData(APPPATH + '/sensors/' + sObj.SCRIPT, sObj.PARAMS)
+        retValue = str(sObj.SENSORCLASS.GetValue(sObj.PARAMS))
         
         if retValue == "ERR":
             # error detected, manage it...
@@ -346,8 +290,10 @@ class agent():
             
             # check for configured notifier
             if (sObj.NOTIFIER != ""):
-                SendNotify(APPPATH + '/notifiers/' + sObj.SCRIPT, \
-                           sObj.NAME + " = " + retValue + "|" + sObj.PARAMS)
+                
+                # Send notify using configured notifier plugin
+                sObj.NOTIFIERCLASS.SendNotify(sObj.NPARAMS)
+                
 
 
     
@@ -372,10 +318,22 @@ class agent():
             tmp.MAX = float(sensorNode.find("./max").get("value"))
             tmp.REFRESH = float(sensorNode.find("./refresh").get("value"))
             tmp.SCRIPT = sensorNode.find("./script").get("value")
+            tmp.IPARAMS = sensorNode.find("./iparams").get("value")
             tmp.PARAMS = sensorNode.find("./params").get("value")
             tmp.NOTIFIER = sensorNode.find("./notifier").get("value")
+            tmp.NIPARAMS = sensorNode.find("./niparams").get("value")
             tmp.NPARAMS = sensorNode.find("./nparams").get("value")
             tmp.LASTCHECK = ""
+            
+            # create instance of sensor plugin class
+            mod = importlib.import_module("sensors." + tmp.SCRIPT)        
+            tmp.SENSORCLASS = mod.SensorClass(tmp.IPARAMS)
+            
+            # check for configured notifier plugin
+            if tmp.NOTIFIER != "":
+                # create instance of notifier plugin class
+                mod = importlib.import_module("notifiers." + tmp.NOTIFIER)
+                tmp.NOTIFIERCLASS = mod.NotifierClass(tmp.NIPARAMS)
             
             es.append(tmp)
 

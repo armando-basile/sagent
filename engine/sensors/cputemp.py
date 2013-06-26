@@ -4,10 +4,10 @@
 __doc__        = "Get cpu temperature using sensors command"
 __author__     = "Armando Basile"
 __copyright__  = "copytight (c) 2013"
-__credits__    = ["AUTHOR_NAME"]
+__credits__    = ["..."]
 __license__    = "GPL"
-__version__    = "0.1.3.0"
-__date__       = "2013-06-24"
+__version__    = "0.1.5.0"
+__date__       = "2013-06-26"
 __maintainer__ = "Armando Basile"
 __email__      = "armando@integrazioneweb.com"
 __status__     = "Stable"
@@ -15,39 +15,67 @@ __status__     = "Stable"
 
 
 import os
-import sys
 import logging
 
+
+# use main logger
 logger = logging.getLogger("sagent")
 
-# set core id to check
-PARAMS=sys.argv[1]
 
-def GetValue():
-    global PARAMS
-    global logger
-    sensors = os.popen("sensors").read()
-    rows = sensors.split('\n')
+# sensor plugin class
+class SensorClass():
     
-    for row in rows:
-        row = row.replace("\r", "")
+    
+    
+    # entry point
+    def __init__(self, initArgs):
         
-        pos = -1
-        try:
-            pos = row.index("Core " + str(PARAMS) + ":")
-        except:
-            pass
+        global logger
         
-        if (pos == 0):
-            row = row[row.index(":")+1:].strip()
-            temp = row[0:row.index(" ")].strip()
-            temp = temp.decode('utf-8').replace(u"°C", "")
-            outval = round(float(temp), 2)
+        # use main logger
+        self.logger = logger
+        
+        # get init parameters
+        self.params = initArgs
+
+
+
+    
+    
+    
+    # get measure from sensor
+    def GetValue(self, execArgs):
+        
+        # using sensors command
+        sensors = os.popen("sensors").read()
+        rows = sensors.split('\n')
+        
+        # parse command output
+        for row in rows:
+            row = row.replace("\r", "")
             
-            # debug
-            return outval
+            pos = -1
+            try:
+                # try to find temperature information
+                pos = row.index("Core " + str(self.params) + ":")
+            except:
+                pass
+            
+            # check for temperature information presence
+            if (pos == 0):
+                #remove unused chars
+                row = row[row.index(":")+1:].strip()
+                temp = row[0:row.index(" ")].strip()
+                temp = temp.decode('utf-8').replace(u"°C", "")
+                
+                outval = round(float(temp), 2)
+                
+                # debug
+                return outval
 
-    return "ERR"
+        return "ERR"
 
-# test method
-print GetValue()
+
+
+# test get measure
+#print SensorClass("1").GetValue("")

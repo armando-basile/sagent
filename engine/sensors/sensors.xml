@@ -2,57 +2,85 @@
 
     <!--
         Each sensor have:
-        enabled : 1=monitor active, 0=monitor deactive
-        min     : min value allowed
-        max     : max value allowed
-        refresh : seconds between survey
-        script  : python script name to recall
-        params  : command line argument  
+        enabled  : 1=monitor active, 0=monitor deactive
+        min      : min value allowed
+        max      : max value allowed
+        refresh  : seconds between survey
+        script   : python module name to access to sensor
+        iparams  : init function parameters
+        params   : execute function parameters
+        notifier : python module name to notify out of range
+        niparams : notifier init function parameters
+        nparams  : notifier send notify function parameters
     -->    
     
     <sensor name="cpu0_temperature" >
         <enabled    value = "1" />
-        <min        value = "-20" />
-        <max        value = "80" />
+        <min        value = "0" />
+        <max        value = "60" />
         <refresh    value = "180" />
         <script     value = "cputemp" />
-        <params     value = "0" />
+        <iparams    value = "0" />
+        <params     value = "" />
         <notifier   value = "" />
+        <niparams    value = "" />
         <nparams    value = "" />
     </sensor>
     
     <sensor name="cpu1_temperature" >
         <enabled    value = "1" />
-        <min        value = "-20" />
-        <max        value = "80" />
+        <min        value = "0" />
+        <max        value = "60" />
         <refresh    value = "180" />
         <script     value = "cputemp" />
-        <params     value = "1" />
+        <iparams    value = "1" />
+        <params     value = "" />
         <notifier   value = "" />
+        <niparams    value = "" />
         <nparams    value = "" />
     </sensor>
 
+    <sensor name="ambient_temp" >
+        <enabled    value = "1" />
+        <min        value = "0" />
+        <max        value = "60" />
+        <refresh    value = "180" />
+        <script     value = "tempergold" />
+        <iparams    value = "" />
+        <params     value = "" />
+        <notifier   value = "" />
+        <niparams    value = "" />
+        <nparams    value = "" />
+    </sensor>
+
+
+<!--
     <sensor name="cpu_temperature" >
         <enabled    value = "1" />
-        <min        value = "-20" />
-        <max        value = "43" />
+        <min        value = "0" />
+        <max        value = "60" />
         <refresh    value = "300" />
         <script     value = "cputemperature" />
+        <iparams    value = "" />
         <params     value = "0" />
         <notifier   value = "" />
+        <niparams    value = "" />
         <nparams    value = "" />    
     </sensor>
 
 
     <sensor name="cpu0_tempother" >
         <enabled    value = "1" />
-        <min        value = "-20" />
-        <max        value = "80" />
+        <min        value = "0" />
+        <max        value = "60" />
         <refresh    value = "300" />
         <script     value = "cputempother" />
+        <iparams    value = "" />
         <params     value = "0" />
         <notifier   value = "" />
+        <niparams    value = "" />
         <nparams    value = "" />    
     </sensor>
+-->
 
 </main>

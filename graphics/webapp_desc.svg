@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="webapp_desc.svg">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.5"
+     inkscape:cx="388.35946"
+     inkscape:cy="401.49128"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1211"
+     inkscape:window-height="908"
+     inkscape:window-x="41"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Livello 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <image
+       y="339.14789"
+       x="30.428574"
+       id="image3150"
+       xlink:href="file:///run/media/armando/DEVDRIVE/sviluppo/python/sagent_solution/graphics/webapp_screenshot.png"
+       height="412"
+       width="647.17078"
+       inkscape:export-filename="/home/armando/Scrivania/sagent_web_desc.png"
+       inkscape:export-xdpi="90.0532"
+       inkscape:export-ydpi="90.0532" />
+    <path
+       inkscape:connector-curvature="0"
+       d="m 19.775592,496.07925 c -2.004175,0 -4.005564,0.77566 -5.541484,2.31954 -3.071839,3.08777 -3.071839,8.05684 0,11.1446 l 15.71879,15.80448 -36.379423,0 c -4.34424,0 -7.840785,3.51884 -7.840785,7.88561 0,4.36677 3.496545,7.88145 7.840785,7.88145 l 36.383559,0 -15.722926,15.80447 c -3.071839,3.08777 -3.071847,8.05683 0,11.14461 3.07184,3.08777 8.01526,3.08777 11.087103,0 l 29.10933,-29.26031 c 3.071847,-3.08778 3.07184,-8.05683 0,-11.1446 l -29.10933,-29.26031 c -1.535922,-1.54389 -3.541443,-2.31954 -5.545619,-2.31954 z"
+       id="rect1061"
+       style="opacity:0.5;fill:#89a8ee;fill-opacity:1;fill-rule:evenodd;stroke:#333333;stroke-width:2;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/home/armando/Scrivania/sagent_web_desc.png"
+       inkscape:export-xdpi="90.0532"
+       inkscape:export-ydpi="90.0532" />
+    <rect
+       style="fill:#ffd479;fill-opacity:1;fill-rule:nonzero;stroke:#6b6b6b;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect4084"
+       width="136"
+       height="81.975616"
+       x="-157"
+       y="486.36218"
+       rx="5.5675554"
+       ry="4.6359992"
+       inkscape:export-filename="/home/armando/Scrivania/sagent_web_desc.png"
+       inkscape:export-xdpi="90.0532"
+       inkscape:export-ydpi="90.0532" />
+    <text
+       xml:space="preserve"
+       style="font-size:16.20248032px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#214478;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       x="-89.628952"
+       y="508.37036"
+       id="text4086"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/armando/Scrivania/sagent_web_desc.png"
+       inkscape:export-xdpi="90.0532"
+       inkscape:export-ydpi="90.0532"><tspan
+         sodipodi:role="line"
+         id="tspan4088"
+         x="-89.628952"
+         y="508.37036">real time sensor</tspan><tspan
+         sodipodi:role="line"
+         x="-89.628952"
+         y="528.62347"
+         id="tspan4111">measurements</tspan><tspan
+         sodipodi:role="line"
+         x="-89.628952"
+         y="543.56171"
+         id="tspan4113"
+         style="font-size:10.80165386px;text-align:center;text-anchor:middle">(refresh each 10 sec.)</tspan></text>
+    <path
+       inkscape:connector-curvature="0"
+       d="m 401.8497,725.99172 c 0,2.00418 0.77566,4.00557 2.31954,5.54149 3.08777,3.07184 8.05684,3.07184 11.1446,0 l 15.80448,-15.71879 0,36.37942 c 0,4.34424 3.51884,7.84079 7.88561,7.84079 4.36677,0 7.88145,-3.49655 7.88145,-7.84079 l 0,-36.38356 15.80447,15.72293 c 3.08777,3.07184 8.05683,3.07185 11.14461,0 3.08777,-3.07184 3.08777,-8.01526 0,-11.0871 l -29.26031,-29.10933 c -3.08778,-3.07185 -8.05683,-3.07184 -11.1446,0 l -29.26031,29.10933 c -1.54389,1.53592 -2.31954,3.54144 -2.31954,5.54561 z"
+       id="rect1061-3"
+       style="opacity:0.5;fill:#89a8ee;fill-opacity:1;fill-rule:evenodd;stroke:#333333;stroke-width:2;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/home/armando/Scrivania/sagent_web_desc.png"
+       inkscape:export-xdpi="90.0532"
+       inkscape:export-ydpi="90.0532" />
+    <rect
+       style="fill:#ffd479;fill-opacity:1;fill-rule:nonzero;stroke:#6b6b6b;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect4084-5"
+       width="291.51471"
+       height="47.975616"
+       x="292.24268"
+       y="765.96021"
+       rx="9.0188551"
+       ry="7.7131958"
+       inkscape:export-filename="/home/armando/Scrivania/sagent_web_desc.png"
+       inkscape:export-xdpi="90.0532"
+       inkscape:export-ydpi="90.0532" />
+    <text
+       xml:space="preserve"
+       style="font-size:16.20248032px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#214478;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       x="437.37106"
+       y="794.38257"
+       id="text4086-6"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/armando/Scrivania/sagent_web_desc.png"
+       inkscape:export-xdpi="90.0532"
+       inkscape:export-ydpi="90.0532"><tspan
+         sodipodi:role="line"
+         x="437.37106"
+         y="794.38257"
+         style="font-size:16.20000076px;text-align:center;text-anchor:middle"
+         id="tspan4168">chart with selected sensor measures</tspan></text>
+    <path
+       inkscape:connector-curvature="0"
+       d="m 509.08337,365.1801 c 0,-2.00418 -0.77566,-4.00557 -2.31954,-5.54149 -3.08777,-3.07184 -8.05684,-3.07184 -11.1446,0 l -15.80448,15.71879 0,-36.37942 c 0,-4.34424 -3.51884,-7.84079 -7.88561,-7.84079 -4.36677,0 -7.88145,3.49655 -7.88145,7.84079 l 0,36.38356 -15.80447,-15.72293 c -3.08777,-3.07184 -8.05683,-3.07185 -11.14461,0 -3.08777,3.07184 -3.08777,8.01526 0,11.0871 l 29.26031,29.10933 c 3.08778,3.07185 8.05683,3.07184 11.1446,0 l 29.26031,-29.10933 c 1.54389,-1.53592 2.31954,-3.54144 2.31954,-5.54561 z"
+       id="rect1061-3-2"
+       style="opacity:0.85;fill:#89a8ee;fill-opacity:1;fill-rule:evenodd;stroke:#333333;stroke-width:2;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/home/armando/Scrivania/sagent_web_desc.png"
+       inkscape:export-xdpi="90.0532"
+       inkscape:export-ydpi="90.0532" />
+    <rect
+       style="fill:#ffd479;fill-opacity:1;fill-rule:nonzero;stroke:#6b6b6b;stroke-width:0.99999994;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect4084-5-7"
+       width="242.01723"
+       height="36.661907"
+       x="350.38898"
+       y="286.241"
+       rx="7.4875069"
+       ry="5.8942542"
+       inkscape:export-filename="/home/armando/Scrivania/sagent_web_desc.png"
+       inkscape:export-xdpi="90.0532"
+       inkscape:export-ydpi="90.0532" />
+    <text
+       xml:space="preserve"
+       style="font-size:16.20248032px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#214478;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       x="470.76862"
+       y="309.0065"
+       id="text4086-6-0"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/armando/Scrivania/sagent_web_desc.png"
+       inkscape:export-xdpi="90.0532"
+       inkscape:export-ydpi="90.0532"><tspan
+         sodipodi:role="line"
+         x="470.76862"
+         y="309.0065"
+         style="font-size:16.20000076px;text-align:center;text-anchor:middle"
+         id="tspan4168-9">parameters for char generation</tspan></text>
+  </g>
+</svg>

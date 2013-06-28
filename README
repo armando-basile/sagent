@@ -48,7 +48,7 @@ RUN ENGINE
      
 
 
-WEB APPLICATION
+WEB APPLICATION (using APACHE)
 ---------------------------------------------------------------------
 
   1. you need to install php-pdo_sqlite php-sockets

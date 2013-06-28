@@ -8,23 +8,24 @@ import serial
 
 class Sms:
     
-    # timing    
-    __waitrw         = 0.3                  # seconds between sends    
-    __readtout       = 3                    # read timeout in seconds
-    __comport        = "/dev/ttyACM0"       # com port to exchange data with phone
-    __baudrate       = 9600                 # serial speed    
-    __readBuff       = 1024                 # read buffer size
-    __smscenter      = "+393916263900"      # FASTWEB SMS Center
-    
-    
-    # object to manage phone/sim card communication
-    __phone = None
-    
-    
-    
-    
-    def ReadData(self, readTimeOut):
+    # Sms class constructor
+    def __init__(self):
         
+        # timing
+        self.__waitrw         = 0.3                  # seconds between sends    
+        self.__readtout       = 3                    # read timeout in seconds
+        self.__comport        = "/dev/ttyACM0"       # com port to exchange data with phone
+        self.__baudrate       = 9600                 # serial speed    
+        self.__readBuff       = 1024                 # read buffer size
+        self.__smscenter      = "+393916263900"      # FASTWEB SMS Center
+                
+        # object to manage phone/sim card communication
+        self.__phone = None
+        
+    
+    
+    # read data from serial port
+    def ReadData(self, readTimeOut):        
         
         endtime = datetime.datetime.now() + datetime.timedelta(0, readTimeOut)
         actual = datetime.datetime.now()
@@ -64,7 +65,10 @@ class Sms:
     
     
     # init phone communication
-    def Init(self):
+    def Init(self, comPort, smsCenter):
+        
+        self.__comport = comPort
+        self.__smscenter = smsCenter
         
         # open communication
         self.__phone = serial.Serial(self.__comport, self.__baudrate, timeout=self.__readtout)

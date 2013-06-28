@@ -23,7 +23,7 @@
         <iparams    value = "0" />
         <params     value = "" />
         <notifier   value = "" />
-        <niparams    value = "" />
+        <niparams   value = "" />
         <nparams    value = "" />
     </sensor>
     
@@ -36,7 +36,7 @@
         <iparams    value = "1" />
         <params     value = "" />
         <notifier   value = "" />
-        <niparams    value = "" />
+        <niparams   value = "" />
         <nparams    value = "" />
     </sensor>
 
@@ -49,8 +49,8 @@
         <iparams    value = "" />
         <params     value = "" />
         <notifier   value = "" />
-        <niparams    value = "" />
-        <nparams    value = "" />
+        <niparams   value = "/dev/ttyACM0,+393916263900" />
+        <nparams    value = "+393355351272" />
     </sensor>
 
 
@@ -64,7 +64,7 @@
         <iparams    value = "" />
         <params     value = "0" />
         <notifier   value = "" />
-        <niparams    value = "" />
+        <niparams   value = "" />
         <nparams    value = "" />    
     </sensor>
 
@@ -78,7 +78,7 @@
         <iparams    value = "" />
         <params     value = "0" />
         <notifier   value = "" />
-        <niparams    value = "" />
+        <niparams   value = "" />
         <nparams    value = "" />    
     </sensor>
 -->

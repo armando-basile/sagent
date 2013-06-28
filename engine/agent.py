@@ -147,7 +147,7 @@ class SocketServerClass():
         
         # remove CrLf and set response as request
         reqData = reqData.replace('\r', '').replace('\n', '')
-        resp = reqData
+        resp = "..."
         
         # check for sensor list request
         if (reqData == "LIST"):
@@ -170,6 +170,7 @@ class SocketServerClass():
                     
         except Exception, e:
             logger.error("ProcessRequest::req: " + reqData + " - error " + e.message)
+            resp = "..."
         
         return resp + "\r\n"
 
@@ -292,7 +293,8 @@ class agent():
             if (sObj.NOTIFIER != ""):
                 
                 # Send notify using configured notifier plugin
-                sObj.NOTIFIERCLASS.SendNotify(sObj.NPARAMS)
+                sObj.NOTIFIERCLASS.SendNotify(sObj.NPARAMS + "|" + \
+                sObj.NAME + " out of range = " + retValue)
                 
 
 
@@ -359,8 +361,6 @@ class agent():
 
     # entry point
     def __init__(self):
-        global APPPATH
-        
         self.stdin_path = '/dev/null'
         self.stdout_path = '/dev/tty'
         self.stderr_path = '/dev/tty'

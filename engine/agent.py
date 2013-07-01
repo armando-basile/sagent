@@ -100,7 +100,7 @@ class SocketServerClass():
                 break
             
             if (client):
-                # manage client
+                # manage client                
                 thread.start_new_thread(self.ProcessClient, (client,))
 
 
@@ -214,6 +214,18 @@ class agent():
     def run(self):
         global logger
         global es
+        
+        if (self.request == "stop"):
+            return
+        
+        
+        if (self.request == "start"):
+            # read xml config file for settings
+            self.ReadSettingsConfigFile()
+            
+            # read xml config file for sensors
+            self.ReadSensorsConfigFile()
+
         
         # running Socket Server thread
         ssc = SocketServerClass()
@@ -330,14 +342,30 @@ class agent():
             # create instance of sensor plugin class
             mod = importlib.import_module("sensors." + tmp.SCRIPT)        
             tmp.SENSORCLASS = mod.SensorClass(tmp.IPARAMS)
+            #tmp.SENSORCLASS.Init()
+            #logger.info("Init " + tmp.NAME + " sensor called")
             
             # check for configured notifier plugin
             if tmp.NOTIFIER != "":
                 # create instance of notifier plugin class
                 mod = importlib.import_module("notifiers." + tmp.NOTIFIER)
                 tmp.NOTIFIERCLASS = mod.NotifierClass(tmp.NIPARAMS)
+                #tmp.NOTIFIERCLASS.Init()
+                #logger.info("Init " + tmp.NAME + " notifier called")
             
             es.append(tmp)
+        
+        # launch init for created objects
+        for sensorEntity in es:                
+            sensorEntity.SENSORCLASS.Init()
+            logger.info("Init " + sensorEntity.NAME + " called")
+            
+            if sensorEntity.NOTIFIER != "":
+                sensorEntity.NOTIFIERCLASS.Init()
+                logger.info("Init " + sensorEntity.NOTIFIER + " called for sensor " + sensorEntity.NAME)
+
+
+
 
     
     # read settings xml config file
@@ -360,18 +388,14 @@ class agent():
 
 
     # entry point
-    def __init__(self):
+    def __init__(self, request):
         self.stdin_path = '/dev/null'
         self.stdout_path = '/dev/tty'
         self.stderr_path = '/dev/tty'
         self.pidfile_path =  self.PIDFILEPATH
         self.pidfile_timeout = self.PIDTIMEOUT
+        self.request = request
         
-        # read xml config file for settings
-        self.ReadSettingsConfigFile()
-        
-        # read xml config file for sensors
-        self.ReadSensorsConfigFile()
         
 
 
@@ -399,7 +423,7 @@ logger.addHandler(handler1)
 logger.warning("request service " + sys.argv[1])
     
 # Manage daemon action
-app = agent()
+app = agent(sys.argv[1])
 daemon_runner = runner.DaemonRunner(app)
 daemon_runner.daemon_context.files_preserve = [handler1.stream]
 daemon_runner.do_action()

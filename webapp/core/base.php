@@ -3,8 +3,8 @@
 include "conf/config.php";
 include "db.php";
 
-$relstring = "rel. 0.1.3.0";
-$relbuild  = "build 2013-06-20";
+$relstring = "rel. 0.1.4.0";
+$relbuild  = "build 2013-07-01";
 $themepath = $basedir . "/themes/" . $theme;
 $language = $deflanguage;
 

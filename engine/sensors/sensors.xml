@@ -15,7 +15,7 @@
     -->    
     
     <sensor name="cpu0_temperature" >
-        <enabled    value = "1" />
+        <enabled    value = "0" />
         <min        value = "0" />
         <max        value = "60" />
         <refresh    value = "180" />
@@ -28,7 +28,7 @@
     </sensor>
     
     <sensor name="cpu1_temperature" >
-        <enabled    value = "1" />
+        <enabled    value = "0" />
         <min        value = "0" />
         <max        value = "60" />
         <refresh    value = "180" />
@@ -43,7 +43,7 @@
     <sensor name="ambient_temp" >
         <enabled    value = "1" />
         <min        value = "0" />
-        <max        value = "60" />
+        <max        value = "30" />
         <refresh    value = "180" />
         <script     value = "tempergold" />
         <iparams    value = "" />
@@ -53,6 +53,19 @@
         <nparams    value = "+393355351272" />
     </sensor>
 
+
+    <sensor name="ambient_temp2" >
+        <enabled    value = "1" />
+        <min        value = "0" />
+        <max        value = "60" />
+        <refresh    value = "180" />
+        <script     value = "tempergold" />
+        <iparams    value = "" />
+        <params     value = "" />
+        <notifier   value = "" />
+        <niparams   value = "/dev/ttyACM0,+393916263900" />
+        <nparams    value = "+393355351272" />
+    </sensor>
 
 <!--
     <sensor name="cpu_temperature" >

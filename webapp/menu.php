@@ -17,8 +17,8 @@ for ($cnt=0; $cnt<count($sensorList)-1; $cnt++ )
 {
     $sensorListRowItem = explode("|", $sensorList[$cnt]);
     $htmlsensordata .= "sensors[" . $cnt . "] = \"" . $sensorListRowItem[0] . "\";\r\n";
-    $htmlsensordata .= "smin[" . $cnt . "] = " . $sensorListRowItem[1] . ";\r\n";
-    $htmlsensordata .= "smax[" . $cnt . "] = " . $sensorListRowItem[2] . ";\r\n";
+    $htmlsensordata .= "smin[" . $cnt . "] = parseFloat(\"" . str_replace(",", ".", $sensorListRowItem[1])  . "\");\r\n";
+    $htmlsensordata .= "smax[" . $cnt . "] = parseFloat(\"" . str_replace(",", ".", $sensorListRowItem[2]) . "\");\r\n";
 
     $tmpSensors .= str_replace("<!-- SENSORNAME -->", $sensorListRowItem[0] , $rowsensor);
     $tmpSensors = str_replace("<!-- SENSORMIN -->", $sensorListRowItem[1] , $tmpSensors);

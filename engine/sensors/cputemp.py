@@ -18,9 +18,6 @@ import os
 import logging
 
 
-# use main logger
-logger = logging.getLogger("sagent")
-
 
 # sensor plugin class
 class SensorClass():
@@ -30,18 +27,27 @@ class SensorClass():
     # entry point
     def __init__(self, initArgs):
         
-        global logger
-        
         # use main logger
-        self.logger = logger
+        self.logger = logging.getLogger("sagent")
         
         # get init parameters
         self.params = initArgs
 
 
 
+    # init after instance created
+    def Init(self):
+        return
     
-    
+
+
+    # close
+    def Close(self):
+        return
+
+
+
+
     
     # get measure from sensor
     def GetValue(self, execArgs):

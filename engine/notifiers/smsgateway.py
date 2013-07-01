@@ -12,7 +12,7 @@ class Sms:
     def __init__(self):
         
         # timing
-        self.__waitrw         = 0.3                  # seconds between sends    
+        self.__waitrw         = 0.5                  # seconds between sends    
         self.__readtout       = 3                    # read timeout in seconds
         self.__comport        = "/dev/ttyACM0"       # com port to exchange data with phone
         self.__baudrate       = 9600                 # serial speed    
@@ -79,14 +79,31 @@ class Sms:
             # send ack
             self.__phone.write(b'AT\r')            
             datain = self.ReadData(self.__readtout)
-            if datain[-4:] != "OK\r\n":
+            datain = datain.replace("\r", "").replace("\n", "")
+            if datain[-2:] != "OK":
                 return "init error: " + datain
             
-            # send sms center
-            self.__phone.write(b'AT+CSCA="' + self.__smscenter + '"\r')
+            time.sleep(self.__waitrw)
+            
+            # get sms center
+            self.__phone.write(b'AT+CSCA?\r')
             datain = self.ReadData(self.__readtout)
-            if datain[-4:] != "OK\r\n":
-                return "init error: sms center error: " + datain
+            datain = datain.replace("\r", "").replace("\n", "")
+            if datain[-2:] != "OK":
+                return "init error: " + datain
+            
+            time.sleep(self.__waitrw)
+            
+            # check for sms center configured
+            if datain.find('"' + self.__smscenter + '"', 0) < 0:            
+                # send update of sms center
+                self.__phone.write(b'AT+CSCA="' + self.__smscenter + '",145\r')
+                datain = self.ReadData(self.__readtout*2)
+                datain = datain.replace("\r", "").replace("\n", "")
+                if datain[-2:] != "OK":
+                    return "init error: sms center error: " + datain
+                
+                time.sleep(self.__waitrw)
             
             # delete all sms received
             #self.__phone.write(b'AT+CMGD=ALL\r')
@@ -109,7 +126,7 @@ class Sms:
 
 
     # send message
-    def Send(self, nmessage, number):
+    def Send(self, number, nmessage):
 
         # update message to send
         smsmsg = nmessage.encode() + b"\r"
@@ -123,18 +140,21 @@ class Sms:
             # send ack
             self.__phone.write(b'AT\r')
             datain = self.ReadData(self.__readtout)
-            if datain[-4:] != "OK\r\n":
+            datain = datain.replace("\r", "").replace("\n", "")
+            if datain[-2:] != "OK":
                 return "send error: [1] " + datain
           
             # set communication for text messages
             self.__phone.write(b'AT+CMGF=1\r')
             datain = self.ReadData(self.__readtout)
-            if datain[-4:] != "OK\r\n":
+            datain = datain.replace("\r", "").replace("\n", "")
+            if datain[-2:] != "OK":
                 return "send error: [2] " + datain
 
             # set phone number
             self.__phone.write(b'AT+CMGS="' + number.encode() + b'"\r')            
             datain = self.ReadData(self.__readtout)
+            datain = datain.replace("\r", "").replace("\n", "")
             if datain[-2:] != "> ":
                 return "send error: [3] " + datain
             
@@ -144,8 +164,8 @@ class Sms:
             self.__phone.write(chr(26))            
             time.sleep(3)
             datain += self.ReadData(self.__readtout)
-            
-            if datain[-4:] != "OK\r\n":
+            datain = datain.replace("\r", "").replace("\n", "")
+            if datain[-2:] != "OK":
                 return "send error: [4] " + datain + " [" + datain.encode("hex") + "]"
             
             

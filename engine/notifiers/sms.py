@@ -24,6 +24,7 @@ xxx,yyy where xxx=serial port device and yyy=sms center phone number
 """
 
 import threading
+import atexit
 import smsgateway
 import logging
 import Queue
@@ -34,87 +35,119 @@ import time
 class NotifierClass():
 
     # create static flag to manage device usage
-    InitStatus = 0
+    InitStatus = [0]
 
     # create static queue
     Messages = Queue.Queue()
-
-    # create static gsm device manager
-    Phone = smsgateway.Sms()
+        
+    # set ready status of device
+    IsReady = [False]
     
-    # main logger
-    logger = logging.getLogger("sagent")
     
-
+    
     # entry point
     def __init__(self, initArgs):
         
-        # flag to check ready state
-        self._isReady = False
-
-        # check for init already called
-        if (NotifierClass.InitStatus != 0):
+        atexit.register(self.OnTerminate)
+        
+        # attach static objects to manage multithread
+        self._InitStatus = NotifierClass.InitStatus
+        self._Messages = NotifierClass.Messages
+        self._Phone = None
+        self._isReady = NotifierClass.IsReady
+        self._iparams = initArgs
+        
+        # main logger
+        self.logger = logging.getLogger("sagent")
+        
+        
+        
+    # init after instance created
+    def Init(self):
+        
+        # check for main instance presence
+        if self._InitStatus[0] != 0:
+            self.logger.info("sms:Init already called")
             return
+        
+        # trace init request passed
+        self.logger.info("sms::Init called")
+        
         
         # set init started
-        NotifierClass.InitStatus = 1
-
+        self._InitStatus[0] = 1
+        
         # extract arguments from parameter
-        args = initArgs.split(',')
+        args = self._iparams.split(',')
         
         if (len(args) != 2):
-            NotifierClass.logger.error("sms::Init::error parameters <> 2, check sensors.xml settings")
+            self.logger.error("sms::Init::error parameters <> 2, check sensors.xml settings")
             return
         
-        # create sms gateway instance and init class        
-        ret = NotifierClass.Phone.Init(args[0], args[1])
+        # create sms gateway instance and init class
+        self._Phone = smsgateway.Sms()
+        ret = self._Phone.Init(args[0], args[1])
 
         # check for successful init    
         if (ret != ""):
             # error detected
-            NotifierClass.logger.error("sms::Init::error " + ret)
+            self.logger.error("sms::Init::error " + ret)
             return
         
+        # set initialized done 
+        self._InitStatus[0] = 2
+        
         # run message queue checker
-        mt = threading.Thread(target=NotifierClass._MessageChecker)
+        mt = threading.Thread(target=self.StartMsgSender, args=())
         mt.daemon = True
         mt.start()
-                
-        self._isReady = True
-        
-        
 
+
+
+
+
+    # recall on terminate is invoked    
+    def OnTerminate(self):
+
+        self._InitStatus[0] = 3     
+        time.sleep(2)
+
+        
 
     
     # Send notify
     def SendNotify(self, execArgs):
-        
+
+
         # check for ready status
-        if (self._isReady != True):
-            NotifierClass.logger.error("sms::SendNotify::error sms notifier isn't ready")
+        if (self._InitStatus[0] != 2):
+            self.logger.error("sms::SendNotify::error sms notifier isn't ready")
             return
         
         # add message to queue
-        NotifierClass.Messages.put(execArgs)
+        self._Messages.put(execArgs)
         
         return
 
 
 
+
+
     # manage send of sms
-    def _SendMessage(msgToSend):
+    def _SendMessage(self, msgToSend):
         
         indata = msgToSend.split('|')
         
         # Send data parameters:
-        # first = message to send
-        # second = phone nomber
+        # first = phone nomber
+        # second = message to send
         
-        ret = NotifierClass.Phone.Send( indata[0], indata[1])
+        
+        ret = self._Phone.Send( indata[0], indata[1])
         # check for successful send
         if (ret != ""):
             # error detected
-            NotifierClass.logger.error("sms::_SendMessage::error " + ret)
+            self.logger.error("sms::_SendMessage::error " + ret)
             return
     
         return
@@ -122,28 +155,34 @@ class NotifierClass():
 
 
     # Thread to scan messages queue
-    def _MessageChecker():
-        
-        while (True):
+    def StartMsgSender(self):
+
+        # check for main instance presence
+        if self._InitStatus[0] != 2:
+            self.logger.info("sms:StartMsgSender already called")
+            return
+
+        self.logger.info("sms:StartMsgSender called")
+        while self._InitStatus[0] == 2:
             
-            # check for message in queue
-            if (NotifierClass.Messages.empty() == False):
+            # check for message in queue            
+            if (self._Messages.empty() == False):
                 
                 # check all messages
-                while (NotifierClass.Messages.empty() == False):
-                    
+                while (self._Messages.empty() == False):
+                    self.logger.info("sms::_MessageChecker:: message in queue")
                     # get and send message
-                    msg = NotifierClass.Messages.get()
-                    NotifierClass._SendMessage(msg)
-                    
+                    msg = self._Messages.get()
+                    self._SendMessage(msg)
+                    self._Messages.task_done()
                     # wait for some seconds
-                    time.sleep(3)
+                    time.sleep(2)
             
-            # wait for 1 minute between scan
-            time.sleep(60)
+            # wait for 1 sec
+            time.sleep(1)
 
 
-
+        self.logger.info("sms::_MessageChecker:: closing")
 
 
 

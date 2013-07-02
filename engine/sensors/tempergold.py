@@ -6,13 +6,22 @@ __author__     = "Armando Basile"
 __copyright__  = "copytight (c) 2013"
 __credits__    = ["..."]
 __license__    = "GPL"
-__version__    = "0.1.5.0"
-__date__       = "2013-06-26"
+__version__    = "0.1.5.1"
+__date__       = "2013-07-02"
 __maintainer__ = "Armando Basile"
 __email__      = "armando@integrazioneweb.com"
 __status__     = "Stable"
 
+"""
+Changelog:
+    0.1.5.0
+        - first release
+    
+    0.1.5.1
+        - fix: measured zero value at each start
 
+
+"""
 
 import threading
 import atexit
@@ -28,7 +37,7 @@ class SensorClass():
     
     
     # device static attributes
-    temperGoldValue = [0]
+    temperGoldValue = [None]
     temperGoldState = [0]
     
     
@@ -104,8 +113,13 @@ class SensorClass():
             self.logger.info("tempergold::GetValue:: device not ready [" + str(self._temperGoldState[0]) + "]")
             return "ERR"
         
-        # return latest readed measure
-        return self._temperGoldValue[0]
+        if self._temperGoldValue[0]:
+            # return latest readed measure
+            return self._temperGoldValue[0]
+            
+        else:
+            # first value not yet readed
+            return "ERR"
         
 
 

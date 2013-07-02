@@ -4,10 +4,10 @@
 __doc__        = "Send sms to notify out of range value of an active sensor"
 __author__     = "Armando Basile"
 __copyright__  = "copytight (c) 2013"
-__credits__    = ["AUTHOR_NAME"]
+__credits__    = ["..."]
 __license__    = "GPL"
-__version__    = "0.1.5.0"
-__date__       = "2013-06-26"
+__version__    = "0.1.5.1"
+__date__       = "2013-07-02"
 __maintainer__ = "Armando Basile"
 __email__      = "armando@integrazioneweb.com"
 __status__     = "Stable"
@@ -21,14 +21,23 @@ sagent xml config file sensors/sensors.xml.
 
 xxx,yyy where xxx=serial port device and yyy=sms center phone number
 
+Changelog:
+    0.1.5.0
+        - first release
+    
+    0.1.5.1
+        - added wait between sends
+    
 """
 
 import threading
 import atexit
+import datetime
 import smsgateway
 import logging
 import Queue
 import time
+
 
 
 # notifier plugin class
@@ -56,6 +65,7 @@ class NotifierClass():
         self._Phone = None
         self._isReady = NotifierClass.IsReady
         self._iparams = initArgs
+        self._waitForSend = 30 # wait 30 seconds between sends
         
         # main logger
         self.logger = logging.getLogger("sagent")
@@ -161,25 +171,32 @@ class NotifierClass():
         if self._InitStatus[0] != 2:
             self.logger.info("sms:StartMsgSender already called")
             return
-
+        
         self.logger.info("sms:StartMsgSender called")
+        
+        # set last send time
+        lastSendTime = datetime.datetime.now()
+        newSendTime = (lastSendTime + datetime.timedelta(0, self._waitForSend))
+        
         while self._InitStatus[0] == 2:
             
-            # check for message in queue            
-            if (self._Messages.empty() == False):
+            # wait some seconds            
+            atNow = datetime.datetime.now()
+            
+            if atNow > newSendTime:
                 
-                # check all messages
-                while (self._Messages.empty() == False):
+                # check for message in queue            
+                if (self._Messages.empty() == False):
+                    
                     self.logger.info("sms::_MessageChecker:: message in queue")
                     # get and send message
                     msg = self._Messages.get()
                     self._SendMessage(msg)
                     self._Messages.task_done()
-                    # wait for some seconds
-                    time.sleep(2)
-            
-            # wait for 1 sec
-            time.sleep(1)
+
+                    # set last send time
+                    lastSendTime = datetime.datetime.now()
+                    newSendTime = (lastSendTime + datetime.timedelta(0, self._waitForSend))
 
 
         self.logger.info("sms::_MessageChecker:: closing")

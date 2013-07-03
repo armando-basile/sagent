@@ -99,8 +99,8 @@ class SensorClass():
     
     
     # close engine
-    def Close(self):
-        self._temperGoldState[0] = 3
+    #def Close(self):
+    #    self._temperGoldState[0] = 3
         
 
 

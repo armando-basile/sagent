@@ -6,8 +6,8 @@ __author__     = "Armando Basile"
 __copyright__  = "copytight (c) 2013"
 __credits__    = ["AUTHOR_NAME"]
 __license__    = "GPL"
-__version__    = "0.1.5.0"
-__date__       = "2013-06-26"
+__version__    = "0.1.6.0"
+__date__       = "2013-07-03"
 __maintainer__ = "Armando Basile"
 __email__      = "armando@integrazioneweb.com"
 __status__     = "Stable"
@@ -390,8 +390,8 @@ class agent():
     # entry point
     def __init__(self, request):
         self.stdin_path = '/dev/null'
-        self.stdout_path = '/dev/tty'
-        self.stderr_path = '/dev/tty'
+        self.stdout_path = '/var/tmp/sagent-daemon.log'
+        self.stderr_path = '/var/tmp/sagent-daemon.log'
         self.pidfile_path =  self.PIDFILEPATH
         self.pidfile_timeout = self.PIDTIMEOUT
         self.request = request

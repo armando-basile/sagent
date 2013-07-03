@@ -12,7 +12,7 @@ php-net-socket
 python-daemon
 python-lockfile
 python-usb
-python-virtualenv
+python-serial
 
 
 

@@ -1,0 +1,108 @@
+#! /bin/bash
+#
+# Author: Armando Basile, 2013
+#
+# Please send feedback to armando@integrazioneweb.com
+#
+# description: software agent to manage sensors
+# chkconfig: 2345 99 01
+#
+### BEGIN INIT INFO
+# Provides:          sagentd
+# Required-Start:    $local_fs $remote_fs $network $syslog $named
+# Required-Stop:     $local_fs $remote_fs $network $syslog $named
+# Default-Start:     3 5
+# Default-Stop:      0 1 6
+# Short-Description: Agent for sensors
+# Description:       Runs up the agent to manage sensors
+### END INIT INFO
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+SCRIPT_FILE="/run/media/armando/DEVDRIVE/sviluppo/python/sagent_solution/engine/agent.py"
+#SCRIPT_FILE="/var/sagent/agent.py"
+PID_FILE="/var/run/sagent.pid"
+SERVICE=sagentd
+RETVAL=0
+
+# start engine
+start() {
+    # Check if service is already running
+    if [ -f $PID_FILE ]
+    then
+        # Restart request
+        restart
+    else
+        gprintf "Starting Server Sagent "    
+        # Start the daemon
+        python $SCRIPT_FILE start
+        RETVAL=$?
+        echo
+        return $RETVAL
+    fi
+}
+
+
+
+# stop engine
+stop() {
+    if [ -f $PID_FILE ]
+    then
+        # Stopping request
+        gprintf "Stopping Server Sagent "
+        # Stop the daemon
+        python $SCRIPT_FILE stop
+        RETVAL=$?
+        echo
+        return $RETVAL
+    else
+        # nothing
+        gprintf "Server Sagent already stopped\n"
+    fi
+}
+
+
+
+# restart engine
+restart() {
+    stop
+    sleep 7 # required for socket server thread
+    start
+}
+
+
+
+# check engine status
+status() {
+	if [ -f $PID_FILE ]
+	then
+		gprintf "Server Sagent is enabled\n"
+	else
+		gprintf "Server Sagent is disabled\n"
+	fi
+    return 0
+}
+
+
+
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  restart)
+    restart
+    ;;
+  status)
+    status
+	;;
+  *)
+    # Refuse to do other stuff
+    gprintf "Usage: %s {start|stop|restart|status}\n" "$SERVICE"
+    exit 1
+    ;;
+esac
+

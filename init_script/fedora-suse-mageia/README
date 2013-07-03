@@ -1,0 +1,22 @@
+sagent is a linux service, developed using python, that monitor
+measurements detected by sensors using plugins (also dev in python).
+
+Copyright (c) 2013, Armando Basile
+
+INSTALL INIT SCRIPT ON FEDORA/SUSE/MAGEIA/MANDRIVA LIKE DISTRO
+--------------------------------------------------------------
+
+  1. copy init_script/fedora-suse-mageia/sagentd into /etc/init.d folder
+  2. give execute permission to file:
+     # chmod 775 /etc/init.d/sagentd
+
+  3. verify that "SCRIPT_FILE" and "PID_FILE" parameters 
+     into /etc/init.d/sagentd link correctly to the "agent.py" python 
+     application script
+
+  4. add new service
+     # chkconfig --add sagentd
+
+  5. if you want to remove service use
+     # chkconfig --del sagentd
+

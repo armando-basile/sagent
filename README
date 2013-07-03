@@ -3,10 +3,24 @@ measurements detected by sensors using plugins (also dev in python).
 
 Copyright (c) 2013, Armando Basile
 
+
+DEPENDENCIES TO INSTALL ON DEBIAN
+---------------------------------------------------------------------
+php5
+php5-sqlite
+php-net-socket
+python-daemon
+python-lockfile
+python-usb
+python-virtualenv
+
+
+
 INSTALL ENGINE
 ---------------------------------------------------------------------
 
-  1. you need to install python dependencies: python-daemon python-lockfile
+  1. you need to install python dependencies: 
+     python-daemon python-lockfile python-usb python-virtualenv
   2. create folder for application files:
      # mkdir /var/sagent
 
@@ -74,8 +88,6 @@ WEB APPLICATION (using APACHE)
   8. if http://localhost/sagent have db access problem try to 
      change permissions on db file:
      # chmod 666 /var/tmp/sagent.sqlite
-
-
 
 
 

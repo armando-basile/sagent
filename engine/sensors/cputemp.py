@@ -42,8 +42,8 @@ class SensorClass():
 
 
     # close
-    def Close(self):
-        return
+    #def Close(self):
+    #    return
 
 
 

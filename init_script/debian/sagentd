@@ -95,6 +95,7 @@ case "$1" in
     ;;
   restart)
     restart
+    log_end_msg "$RETVAL"
     ;;
   status)
     status
